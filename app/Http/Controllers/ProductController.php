@@ -36,16 +36,16 @@ class ProductController extends Controller
             ->addColumn('name',fn($row) => $row->name)
             ->addColumn('brand', fn($row) => $row->brand ? $row->brand->name : 'Sin marca')
             ->addColumn('stock', fn($row) => $row->stock ? $row->stock->quantity : 0)
-            ->addColumn('cost', fn($row) => $row->cost)
-            ->addColumn('retencion', fn($row) => $row->retencion)
-            ->addColumn('flete', fn($row) => $row->flete)
-            ->addColumn('IVA', fn($row) => $row->IVA)
-            ->addColumn('cost_with_taxes', fn($row) => $row->cost_with_taxes)
+            ->addColumn('cost', fn($row) => number_format($row->cost, 2))
+            ->addColumn('retencion', fn($row) => $row->retencion ?? 'N/A')
+            ->addColumn('flete', fn($row) => $row->flete ?? 'N/A')
+            ->addColumn('IVA', fn($row) => $row->IVA ?? 'N/A')
+            ->addColumn('cost_with_taxes', fn($row) => number_format($row->cost_with_taxes, 2))
             ->addColumn('utility', fn($row) => $row->utility)
-            ->addColumn('price', fn($row) => $row->price)
+            ->addColumn('price', fn($row) => number_format($row->price, 2))
             ->addColumn('discount', fn($row) => $row->discount)
-            ->addColumn('price_with_discount', fn($row) => $row->price_with_discount)
-            ->addColumn('rentability', fn($row) => $row->rentability)
+            ->addColumn('price_with_discount', fn($row) => number_format($row->price_with_discount, 2))
+            ->addColumn('rentability', fn($row) => $row->rentability . '%')
             ->addColumn('details', fn($row) => $row->details)
             ->addColumn('updated_by', fn($row) => $row->updated_by->name ?? 'N/A')
             ->addColumn('created_at', fn($row) => $row->created_at->format('d/m/Y H:i'))
@@ -67,6 +67,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // Limpieza de formato: 12.450,00 → 12450.00
+        $fieldsToClean = [
+            'cost',
+            'retencion',
+            'flete',
+            'IVA',
+            'cost_with_taxes',
+            'utility',
+            'price',
+            'discount',
+            'price_with_discount',
+            'rentability',
+        ];
+
+        foreach ($fieldsToClean as $field) {
+            if ($request->filled($field)) {
+                $value = str_replace(['.', ','], ['', '.'], $request->$field);
+                $request->merge([$field => $value]);
+            }
+        }
+
         // dd($request->all());
         $validated = $request->validate([
             'name'              => 'required|string|max:255',

@@ -40,7 +40,7 @@
                     {
                         data: 'id',
                         render: function(data) {
-                            return `<a href="{{ url('brands')}}/${data}">${data}</a>`;
+                            return `<a href="{{ url('brands')}}/${data}/edit">${data}</a>`;
                         },
                         orderable: true,
                         searchable: true

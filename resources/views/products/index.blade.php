@@ -15,6 +15,7 @@
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Marca</th>
+                        <th>Inventario</th>
                         <th>Costo</th>
                         <th>Flete</th>
                         <th>Retención</th>
@@ -24,7 +25,7 @@
                         <th>Precio</th>
                         <th>Descuento</th>
                         <th>Precio Final</th>
-                        <th>Cantidad</th>
+                        <th>Rentabilidad</th>
                         <th>Detalle</th>
                         <th>Usuario Actualización</th>
                         <th>Fecha de Creación</th>

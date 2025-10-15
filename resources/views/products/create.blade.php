@@ -1,3 +1,10 @@
+@push('scripts')
+    @vite([
+        'resources/js/productForm.js'
+    ])
+@endpush
+
+
 <x-app-layout>
     <x-slot name="header">
         <h2>
@@ -28,17 +35,14 @@
             <x-input-group
                 name="retencion"
                 label="Retención"
-                required="false"
             />
             <x-input-group
                 name="flete"
                 label="Flete"
-                required="false"
             />
             <x-input-group
                 name="IVA"
                 label="IVA"
-                required="false"
             />
             <x-input-group
                 name="cost_with_taxes"

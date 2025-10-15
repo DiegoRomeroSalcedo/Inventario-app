@@ -1,6 +1,6 @@
 @push('scripts')
     @vite([
-        'resources/js/getDataProduct.js',
+        'resources/js/salesPage.js',
         'resources/js/getDataClient.js',
     ])
 @endpush
@@ -40,7 +40,46 @@
             <tbody></tbody>
         </table>
         <div>
+            {{-- Info de vuelto --}}
+            <x-input-group
+                name="total_sale"
+                label="Total de la venta"
+                required="false"
+                {{-- value="2222222222" --}}
+            />
+            <x-input-group
+                name="received_amount"
+                label="Monto recibido"
+                required="false"
+                {{-- value="2222222222" --}}
+            />
+            <x-input-group
+                name="change"
+                label="Valor Cambio"
+                required="false"
+                {{-- value="2222222222" --}}
+            />
+            <x-select-field 
+                name="payment_method"
+                label="Método de pago"
+                :options="[
+                    'electronic' => 'Pago Electronico',
+                    'cash' => 'Efectivo',
+                    'card' => 'Tarjeta',
+                    'transfer' => 'Transferencia',
+                    'check' => 'Cheque',
+                    'other' => 'Otro',
+                ]"
+            />
+        </div>
+        <div>
             <h2>Información del cliente</h2>
+            <x-input-group
+                type="hidden"
+                label=""
+                name="customer_id"
+                id="customer_id"
+            />
             <x-input-group
                 name="identification"
                 label="Cédula del cliente"
@@ -48,7 +87,7 @@
                 value="2222222222"
             />
             <x-input-group
-                name="name"
+                name="customer_name"
                 label="Nombres"
                 required="false"
                 value="Cliente Genérico"
@@ -71,5 +110,8 @@
                 required="false"
                 value="Ciudad"
             />
+            <x-primary-button id="finalize-sale">
+                Guardar venta
+            </x-primary-button>
         </div>
 </x-app-layout>

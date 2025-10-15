@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -24,12 +25,17 @@ Route::get('/products/getJsonToProducts', [ProductController::class, 'getJsonToP
     ->middleware(['auth', 'verified'])
     ->name('products.getJsonToProducts');
 
+Route::get('/sales/getJsonToSales', [SalesController::class, 'getJsonToSales'])
+    ->middleware(['auth', 'verified'])
+    ->name('sales.getJsonToSales');
+
 Route::get('/products/data/{id}', [ProductController::class, 'getDataProduct'])->middleware(['auth', 'verified']);
-Route::get('/clients/data/{id}', [ClientsController::class, 'getDataClient'])->middleware(['auth', 'verified']);
+Route::get('/clients/data/cc/{cc}', [ClientsController::class, 'getDataClient'])->middleware(['auth', 'verified']);
 
 Route::resource('brands', BrandsController::class)->middleware(['auth', 'verified'])->names('brands');
 Route::resource('products', ProductController::class)->middleware(['auth', 'verified'])->names('products');
 Route::resource('sales', SalesController::class)->middleware(['auth', 'verified'])->names('sales');
+Route::resource('invoices', InvoiceController::class)->middleware(['auth', 'verified'])->names('invoices');
 
 
 Route::middleware('auth')->group(function () {

@@ -40,7 +40,7 @@ class BrandsController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   
         return view('brands.create');
     }
 
@@ -74,7 +74,8 @@ class BrandsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // $data = Brand::findOrFail($id);
+        // return view('brands.edit', compact('data'));
     }
 
     /**

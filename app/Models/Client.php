@@ -12,7 +12,7 @@ class Client extends Model
 
     protected $fillable = [
         'identification',
-        'name',
+        'customer_name',
         'phone',
         'email',
         'address',
@@ -24,5 +24,10 @@ class Client extends Model
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'client_id');
     }
 }

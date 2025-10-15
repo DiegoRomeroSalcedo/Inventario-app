@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Sale;
 
 class Product extends Model
 {
@@ -47,5 +48,10 @@ class Product extends Model
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'product_id');
     }
 }

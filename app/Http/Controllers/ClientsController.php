@@ -39,9 +39,9 @@ class ClientsController extends Controller
         //
     }
 
-    public function getDataClient($id)
+    public function getDataClient($cc)
     {
-        $client = Client::find($id);
+        $client = Client::where('identification', $cc)->first();
         
         if ($client) {
             return response()->json([
