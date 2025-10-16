@@ -47,6 +47,20 @@ class InvoiceController extends Controller
             ->make(true);
     }
 
+    public function getDataInvoice($id)
+    {
+        $invoice = Invoice::with('sales.product', 'client')->find($id);
+
+        if ($invoice) {
+            return response()->json([
+                'exists' => true,
+                'data' => $invoice,
+            ]);
+        }
+
+        return response()->json(['exist' => false]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

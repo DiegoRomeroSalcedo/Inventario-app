@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\SaleReturnController;
 use App\Models\Product;
 
 Route::get('/', function () {
@@ -35,12 +36,13 @@ Route::get('/invoices/getJsonToInvoices', [InvoiceController::class, 'getJsonToI
 
 Route::get('/products/data/{id}', [ProductController::class, 'getDataProduct'])->middleware(['auth', 'verified']);
 Route::get('/clients/data/cc/{cc}', [ClientsController::class, 'getDataClient'])->middleware(['auth', 'verified']);
+Route::get('/invoices/data/{id}', [InvoiceController::class, 'getDataInvoice'])->middleware(['auth', 'verified']);
 
 Route::resource('brands', BrandsController::class)->middleware(['auth', 'verified'])->names('brands');
 Route::resource('products', ProductController::class)->middleware(['auth', 'verified'])->names('products');
 Route::resource('sales', SalesController::class)->middleware(['auth', 'verified'])->names('sales');
 Route::resource('invoices', InvoiceController::class)->middleware(['auth', 'verified'])->names('invoices');
-
+Route::resource('returns', SaleReturnController::class)->middleware(['auth', 'verified'])->names('returns');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
