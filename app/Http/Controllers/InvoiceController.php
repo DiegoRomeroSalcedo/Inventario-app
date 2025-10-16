@@ -9,6 +9,8 @@ use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class InvoiceController extends Controller
 {
     /**
@@ -16,7 +18,33 @@ class InvoiceController extends Controller
      */
     public function index()
     {
+        return view('invoices.index');
+    }
+
+    public function getJsonToInvoices(Request $request)
+    {
+        $search = $request->input('search.value');
+        $data = Invoice::with('client', 'createdBy')
+            ->when($search, function($query, $search) {
+                $query->where('id', 'like', "%{$search}%")
+                    ->orWhereHas('client', function($q) use ($search) {
+                        $q->where('customer_name', 'like', "%{$search}");
+                    });
+            })
+            ->orderBy('id', 'desc');
         
+        // dd($request->all($data));
+        return DataTables::of($data)
+            ->addColumn('id', fn($row) => $row->id)
+            ->addColumn('total_sale', fn($row) => $row->total_sale)
+            ->addColumn('total_discount', fn($row) => $row->total_discount)
+            ->addColumn('received_amount', fn($row) => $row->received_amount)
+            ->addColumn('change_amount', fn($row) => $row->change_amount)
+            ->addColumn('payment_method', fn($row) => $row->payment_method)
+            ->addColumn('client_name', fn($row) => $row->client->customer_name)
+            ->addColumn('user_id', fn($row) => $row->createdBy->name)
+            ->addColumn('created_at', fn($row) => $row->created_at->format('d/m/Y H:i'))
+            ->make(true);
     }
 
     /**

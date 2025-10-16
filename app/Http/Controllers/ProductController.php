@@ -66,7 +66,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         // Limpieza de formato: 12.450,00 → 12450.00
         $fieldsToClean = [
             'cost',
@@ -153,7 +153,9 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Product::with('brand', 'stock')->find($id);
+        $brands = Brand::all();
+        return view('products.edit', compact('data', 'brands'));
     }
 
     /**
@@ -161,8 +163,82 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        $product = Product::with('stock')->findOrFail($id);
+
+        // Limpieza de formato: 12.450,00 → 12450.00
+        $fieldsToClean = [
+            'cost',
+            'retencion',
+            'flete',
+            'IVA',
+            'cost_with_taxes',
+            'utility',
+            'price',
+            'discount',
+            'price_with_discount',
+            'rentability',
+        ];
+
+        foreach ($fieldsToClean as $field) {
+            if ($request->filled($field)) {
+                $value = $request->$field;
+
+                // Si tiene formato con separador de miles o coma decimal, limpiamos
+                if (preg_match('/[.,]/', $value) && !is_numeric($value)) {
+                    $value = str_replace(['.', ','], ['', '.'], $value);
+                }
+
+                $request->merge([$field => $value]);
+            }
+        }
+
+        // Validación
+        $validated = $request->validate([
+            'name'              => 'required|string|max:255',
+            'cost'              => 'nullable|numeric',
+            'retencion'         => 'nullable|numeric',
+            'flete'             => 'nullable|numeric',
+            'IVA'               => 'nullable|numeric',
+            'cost_with_taxes'   => 'nullable|numeric',
+            'utility'           => 'nullable|numeric',
+            'price'             => 'nullable|numeric',
+            'discount'          => 'nullable|numeric',
+            'expiration_date'   => 'nullable|date',
+            'price_with_discount' => 'nullable|numeric',
+            'rentability'       => 'nullable|numeric',
+            'details'           => 'nullable|string',
+            'unity_type'        => 'required|string',
+            'unit_of_measure'   => 'nullable|string',
+            'brand_id'          => 'nullable|exists:brands,id',
+            'quantity'          => 'required|integer|min:0',
+        ]);
+
+        // Actualizamos los campos
+        $validated['updated_by'] = Auth::id();
+
+        $product->update($validated);
+
+        // Actualizamos el stock
+        if ($product->stock) {
+            $product->stock->update([
+                'quantity' => $validated['quantity'],
+                'updated_by' => Auth::id(),
+            ]);
+        } else {
+            // En caso de que no exista el stock (raro pero posible)
+            $product->stock()->create([
+                'quantity' => $validated['quantity'],
+                'created_by' => Auth::id(),
+                'updated_by' => Auth::id(),
+            ]);
+        }
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Producto actualizado correctamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.

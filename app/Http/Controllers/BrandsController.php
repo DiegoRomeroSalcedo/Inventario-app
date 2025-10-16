@@ -74,8 +74,8 @@ class BrandsController extends Controller
      */
     public function edit(string $id)
     {
-        // $data = Brand::findOrFail($id);
-        // return view('brands.edit', compact('data'));
+        $data = Brand::findOrFail($id);
+        return view('brands.edit', compact('data'));
     }
 
     /**
@@ -83,8 +83,27 @@ class BrandsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // 1️⃣ Validar los datos del formulario
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:brands,name,' . $id,
+        ]);
+
+        // 2️⃣ Buscar la marca existente
+        $brand = Brand::findOrFail($id);
+
+        // 3️⃣ Actualizar los campos
+        $brand->update([
+            'name' => $validated['name'],
+            'usuario_actualizacion' => Auth::user() ?? 'sistema', // opcional, si manejas usuario
+            'fecha_actualizacion' => Auth::user(), // opcional si lo manejas manualmente
+        ]);
+
+        // 4️⃣ Redirigir o devolver respuesta
+        return redirect()
+            ->route('brands.index')
+            ->with('success', 'La marca se actualizó correctamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.

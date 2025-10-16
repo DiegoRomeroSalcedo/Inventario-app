@@ -54,7 +54,7 @@
                     {
                         data: 'id',
                         render: function(data) {
-                            return `<a href="{{ url('products')}}/${data}">${data}</a>`
+                            return `<a href="{{ url('products')}}/${data}/edit">${data}</a>`
                         },
                         searchable: true,
                         orderable: true

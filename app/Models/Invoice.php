@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Client;
+use App\Models\User;
 
 class Invoice extends Model
 {
@@ -31,5 +32,10 @@ class Invoice extends Model
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

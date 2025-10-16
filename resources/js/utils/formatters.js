@@ -1,18 +1,25 @@
 export function formatPrice(value) {
-    if (!value) return '';
+    if (value === null || value === undefined) return '';
 
-    // Quitamos puntos o comas y deja solo números
-    const numericValue = value.toString().replace(/[.,\s]/g, '');
+    // Quitamos cualquier cosa que no sea número o separador
+    const numericValue = value.toString().replace(/[^\d,.-]/g, '');
+    if (numericValue === '') return '';
 
-    // Si no es número, devolvemos vacío
-    if (isNaN(numericValue)) return '';
+    const parsed = parseFloat(numericValue.replace(',', '.'));
+    if (isNaN(parsed)) return '';
 
-    // Devolvemos con formato de miles (sin decimales)
-    return new Intl.NumberFormat('de-De').format(numericValue);
+    // Mostramos con separador de miles y 2 decimales
+    return parsed.toLocaleString('es-CO', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
 
 export function formattedPrice(value) {
-    return value.toLocaleString('es-CO', {
+    const num = parseFloat(value);
+    if (isNaN(num)) return '0.00';
+
+    return num.toLocaleString('es-CO', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });

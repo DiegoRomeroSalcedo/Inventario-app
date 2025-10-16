@@ -4,7 +4,7 @@
             {{ __('Actualizar marca') }}
         </h2>
     </x-slot>
-    <form action="{{ route('brands.update') }}" method="POST">
+    <form action="{{ route('brands.update', $data->id) }}" method="POST">
         @csrf
         @method('PUT')
         <x-input-group

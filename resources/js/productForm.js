@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ])
 
     function updateCost() {
+        console.log(cost.value);
         const total = calculateTotalCost(cost.value, retencionInput.value, fleteInput.value, ivaInput.value);
         costWithTaxesInput.value = formattedPrice(total);
     }
@@ -43,7 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
         rentabilityInput.value = formattedPrice(rentability);
     }
 
-    cost.addEventListener('input', updateCost);
+    cost.addEventListener('input', () => {
+        updateCost();
+        updatePrice();
+        updateFinalPrice();
+        updateRentability();
+    });
     retencionInput.addEventListener('input', updateCost);
     fleteInput.addEventListener('input', updateCost);
     ivaInput.addEventListener('input', updateCost);

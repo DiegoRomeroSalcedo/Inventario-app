@@ -46,8 +46,8 @@ class SalesController extends Controller
             ->addColumn('sale_amount', fn($row) => number_format($row->sale_amount))
             ->addColumn('created_by', fn($row) => $row->createdBy->name)
             ->addColumn('updated_by', fn($row) => $row->updatedBy->name ?? 'N/A')
-            ->addColumn('created_at', fn($row) => $row->created_at)
-            ->addColumn('updated_at', fn($row) => $row->updated_at)
+            ->addColumn('created_at', fn($row) => $row->created_at->format('d/m/Y H:i'))
+            ->addColumn('updated_at', fn($row) => $row->updated_at->format('d/m/Y H:i'))
             ->make(true);
     }
 
