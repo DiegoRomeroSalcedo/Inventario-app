@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Sale;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -58,6 +59,23 @@ class SalesController extends Controller
     {
         return view('sales.create');
     }
+
+    public function monthlySales()
+    {
+         // Agrupamos las ventas por mes
+        $data = Sale::select(
+                DB::raw('MONTH(created_at) as month'),
+                DB::raw('SUM(sale_amount) as total_sales')
+            )
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->orderBy(DB::raw('MONTH(created_at)'))
+            ->get();
+
+        // Devolvemos la respuesta en formato JSON
+        return response()->json($data);
+    }
+
+
 
     /**
      * Store a newly created resource in storage.

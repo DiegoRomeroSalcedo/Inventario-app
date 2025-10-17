@@ -34,6 +34,10 @@ Route::get('/invoices/getJsonToInvoices', [InvoiceController::class, 'getJsonToI
     ->middleware(['auth', 'verified'])
     ->name('invoices.getJsonToInvoices');
 
+Route::get('/sales/monthly', [SalesController::class, 'monthlySales'])
+    ->middleware(['auth', 'verified'])
+    ->name('sales.monthly');
+
 Route::get('/products/data/{id}', [ProductController::class, 'getDataProduct'])->middleware(['auth', 'verified']);
 Route::get('/clients/data/cc/{cc}', [ClientsController::class, 'getDataClient'])->middleware(['auth', 'verified']);
 Route::get('/invoices/data/{id}', [InvoiceController::class, 'getDataInvoice'])->middleware(['auth', 'verified']);
