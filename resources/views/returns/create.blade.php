@@ -47,7 +47,6 @@
                         <th>Precio Final</th>
                         <th>Total</th>
                         <th>Unidades Devolución</th>
-                        <th>Motivo</th>
                         <th>Reinsertar Inventario</th>
                     </tr>
                 </thead>

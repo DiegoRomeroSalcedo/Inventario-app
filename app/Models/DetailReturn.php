@@ -9,6 +9,8 @@ class DetailReturn extends Model
 {
     use HasFactory;
 
+    protected $table = 'details_return';
+
     protected $fillable = [
         'sale_return_id',
         'sale_id',
@@ -18,4 +20,14 @@ class DetailReturn extends Model
         'total',
         'observation',
     ];
+
+    public function saleReturn() 
+    {
+        return $this->belongsTo(SaleReturn::class, 'sale_return_id');
+    }
+
+    public function sale() 
+    {
+        return $this->belongsTo(Sale::class, 'sale_id');
+    }
 }
