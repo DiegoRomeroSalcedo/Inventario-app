@@ -17,22 +17,24 @@
         <!-- Styles -->
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="font-sans antialiased">
+    <body>
         <div class="min-h-screen">
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
+            {{-- <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
-            @endisset
+            @endisset --}}
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="max-w-auto mx-auto p-6 bg-white dark:bg-[#0a0a0a]">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
         @stack('scripts')

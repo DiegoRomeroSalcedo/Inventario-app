@@ -1,51 +1,45 @@
 export function renderProduct(data, onAddToList) {
-    const section = document.getElementById('data-product');
+    const tableBody = document.getElementById('product-table-body');
+    tableBody.innerHTML = '';
 
-    let html = `
-        <h4><strong>Código</strong> ${data.id}</h4>
-        <p><strong>Nombre:</strong> ${data.name}</p>
-        <p><strong>Marca:</strong> ${data.brand.name} </p>
-        <p><strong>Precio:</strong> ${data.price} </p>
-        <p><strong>Descuento:</strong> ${data.discount} </p>
-        <p><strong>Precio Final:</strong> ${data.price_with_discount} </p>
-        <p><strong>Detalle:</strong> ${data.details} </p>
-        <p><strong>Tipo de unidad:</strong> ${data.unity_type} </p>
-        <p><strong>Unidad de medida:</strong> ${data.unit_of_measure} </p>
-        <p><strong>Cantidad en inventario:</strong> ${data.stock.quantity} </p>
+    if (!data || !data.id) {
+        tableBody.innerHTML = `
+            <tr><td colspan="12" class="text-center text-gray-500">Producto no encontrado</td></tr>
+        `;
+        return;
+    }
+
+    const formatCurrency = value => {
+        const number = parseFloat(value ?? 0);
+        return number.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+    };
+
+    // Crear fila
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td class="text-center">${data.id}</td>
+        <td class="text-center">${data.name}</td>
+        <td class="text-center">${data.brand?.name ?? '—'}</td>
+        <td class="text-center">${formatCurrency(data.price)}</td>
+        <td class="text-center">${data.discount ?? 0}%</td>
+        <td class="text-center">${formatCurrency(data.price_with_discount)}</td>
+        <td class="text-center">${data.details ?? '—'}</td>
+        <td class="text-center">${data.stock?.quantity ?? 0}</td>
+        <td class="text-center">
+            <input type="number" id="quantity" value="${data.unity_type === 'unit' ? 1 : 0}" 
+                min="1" max="${data.stock?.quantity ?? 0}" step="${data.unity_type === 'unit' ? 1 : 0.01}"
+                class="border rounded-md w-20 text-center dark:bg-[#181818] dark:text-gray-300"
+            />
+        </td>
+        <td class="text-center">
+            <button id="add-to-list" 
+                class="bg-white border border-gray-800 px-3 py-1 rounded-md hover:bg-gray-200 transition">
+                Agregar
+            </button>
+        </td>
     `;
 
-    if (data.unity_type === 'unit') {
-        html += `
-            <div>
-                <button id="decrease">-</button>
-                <input type="number" id="quantity" value="1" min="1" max="${data.stock.quantity}">
-                <button id="increase">+</button>
-            </div>
-        `;
-    } else {
-        html += `
-            <div>
-                <label>Cantidad (${data.unit_of_measure}):</label>
-                <input type="number" id="quantity" value="0" min="0" step="0.01">
-            </div>
-        `;
-    }
-
-    html += `<button id="add-to-list">Agregar a la lista</button>`;
-    section.innerHTML = html;
-
-    // Control de botones +/-
-    if (data.unity_type === 'unit') {
-        const quantityInput = document.getElementById("quantity");
-        document.getElementById("increase").addEventListener("click", () => {
-            if (quantityInput.value < data.stock.quantity)
-                quantityInput.value = Number(quantityInput.value) + 1;
-        });
-        document.getElementById("decrease").addEventListener("click", () => {
-            if (quantityInput.value > 1)
-                quantityInput.value = Number(quantityInput.value) - 1;
-        });
-    }
+    tableBody.appendChild(row);
 
     // Botón de agregar
     document.getElementById("add-to-list").addEventListener("click", () => {

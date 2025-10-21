@@ -7,6 +7,8 @@ use App\Models\SaleReturn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class SaleReturnController extends Controller
 {
@@ -16,6 +18,35 @@ class SaleReturnController extends Controller
     public function index()
     {
         return view('returns.index');
+    }
+
+    public function getJsonToSalesReturn(Request $request)
+    {
+        $search = $request->input('search.value');
+        $data = DetailReturn::with(['saleReturn', 'sale', 'product'])
+            ->when($search, function($query,$search) {
+                $query->where('id', 'like', "%{$search}%")
+                    ->orWhereHas('saleReturn', function($q) use ($search) {
+                        $q->where('invoice_id', 'like', "%{$search}%");
+                    });
+            })
+            ->orderBy('id', 'desc');
+
+        return DataTables::of($data)
+            ->addColumn('id', fn($row) => $row->id)
+            ->addColumn('sale_return_id', fn($row) => $row->sale_return_id)
+            ->addColumn('invoice_id', fn($row) => $row->saleReturn->invoice_id)
+            ->addColumn('sale_id', fn($row) => $row->sale_id)
+            ->addColumn('product_name', fn($row) => $row->product->name)
+            ->addColumn('quantity', fn($row) => $row->quantity)
+            ->addColumn('unit_price', fn($row) => $row->unit_price)
+            ->addColumn('total', fn($row) => $row->total)
+            ->addColumn('observation', fn($row) => $row->saleReturn->reason)
+            ->addColumn('created_by', fn($row) => $row->saleReturn->createdBy->name)
+            ->addColumn('created_at', fn($row) =>
+                Carbon::parse($row->updated_at)->translatedFormat('d F Y - h:i A')
+            )
+            ->make(true);
     }
 
     /**

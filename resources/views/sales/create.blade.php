@@ -14,18 +14,37 @@
 
         <form action="{{ route('sales.store')}}" method="POST">
             @csrf
-            <x-input-group
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-4">
+                <x-input-group
                 name="id"
-                label="ID"
+                label="Código de producto"
                 required="true"
             />
+            </div>
         </form>
-        <div id="data-product">
-            <!-- Aquí se mostrarán los datos del producto -->
-        </div>
-        <table id="list">
+        <table id="data-product" class="table-auto w-full border mt-4">
+    <thead>
+        <tr class="bg-gray-100">
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Descuento</th>
+            <th>Precio Final</th>
+            <th>Detalle</th>
+            <th>Cantidad Inventario</th>
+            <th>Cantidad Venta</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody id="product-table-body">
+        <tr><td colspan="12" class="text-center text-gray-500">Sin datos</td></tr>
+    </tbody>
+</table>
+
+        <table id="list" class="table-auto w-full border mt-4 mb-8">
             <thead>
-                <tr>
+                <tr class="bg-gray-100">
                     <th>Código</th>
                     <th>Nombre</th>
                     <th>Marca</th>
@@ -37,9 +56,11 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                <tr><td colspan="12" class="text-center text-gray-500">Sin datos</td></tr>
+            </tbody>
         </table>
-        <div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
             {{-- Info de vuelto --}}
             <x-input-group
                 name="total_sale"
@@ -72,44 +93,45 @@
                 ]"
             />
         </div>
-        <div>
-            <h2>Información del cliente</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-4">
+            <x-input-group
+            name="identification"
+            label="Cédula del cliente"
+            required="false"
+            value="2222222222"
+            />
+            <x-input-group
+            name="customer_name"
+            label="Nombres"
+            required="false"
+            value="Cliente Genérico"
+            />
+            <x-input-group
+            name="phone"
+            label="Teléfono"
+            required="false"
+            value="0000000000"
+            />
+            <x-input-group
+            name="email"
+            label="Correo"
+            required="false"
+            value="clientegenérico@gmail.com"
+            />
+            <x-input-group
+            name="address"
+            label="Dirección"
+            required="false"
+            value="Ciudad"
+            />
             <x-input-group
                 type="hidden"
                 label=""
                 name="customer_id"
                 id="customer_id"
             />
-            <x-input-group
-                name="identification"
-                label="Cédula del cliente"
-                required="false"
-                value="2222222222"
-            />
-            <x-input-group
-                name="customer_name"
-                label="Nombres"
-                required="false"
-                value="Cliente Genérico"
-            />
-            <x-input-group
-                name="phone"
-                label="Teléfono"
-                required="false"
-                value="0000000000"
-            />
-            <x-input-group
-                name="email"
-                label="Correo"
-                required="false"
-                value="clientegenérico@gmail.com"
-            />
-            <x-input-group
-                name="address"
-                label="Dirección"
-                required="false"
-                value="Ciudad"
-            />
+        </div>
+        <div class="flex justify-center pt-4">
             <x-primary-button id="finalize-sale">
                 Guardar venta
             </x-primary-button>

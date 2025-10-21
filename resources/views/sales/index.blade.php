@@ -4,9 +4,11 @@
             {{ __('Ventas') }}
         </h2>
 
-        <x-primary-button>
-            <a href="{{ route('sales.create') }}">Insertar Venta</a>
-        </x-primary-button>
+        <div class="mb-6">
+            <x-primary-button>
+                <a href="{{ route('sales.create') }}">Insertar Venta</a>
+            </x-primary-button>
+        </div>
         <div>
         <div>
             <table id="sales-table" class="display">

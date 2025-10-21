@@ -19,10 +19,6 @@ export default {
                 ]
     		},
     		colors: {
-    			gray: {
-    				'800': '#151515',
-    				'900': '#0a0a0a'
-    			},
     			background: 'hsl(var(--background))',
     			foreground: 'hsl(var(--foreground))',
     			card: {
@@ -72,5 +68,5 @@ export default {
     	}
     },
 
-    plugins: [forms, require("tailwindcss-animate")],
+    // plugins: [forms, require("tailwindcss-animate")],
 };

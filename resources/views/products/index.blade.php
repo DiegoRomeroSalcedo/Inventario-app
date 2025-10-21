@@ -4,11 +4,13 @@
             {{ __('Productos') }}
         </h2>
     </x-slot>
-    <x-primary-button>
-        <a href="{{ route('products.create') }}">Crear Producto</a>
-    </x-primary-button>
+    <div class="mb-6">
+        <x-primary-button>
+            <a href="{{ route('products.create') }}">Crear Producto</a>
+        </x-primary-button>
+    </div>
     <div>
-        <div>
+        <div class="overflow-x-auto">
             <table id="products-table" class="display">
                 <thead>
                     <tr>

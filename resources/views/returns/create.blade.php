@@ -14,11 +14,14 @@
 
     <div>
             @csrf
-            <x-input-group
-                name="invoice_id"
-                label="Código de factura"
-                required="true"
-            />
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <x-input-group
+                    name="invoice_id"
+                    label="Código de factura"
+                    required="true"
+                />
+            </div>
 
             <table id="invoice-data" class="table-auto w-full border mt-4">
                 <thead>
@@ -54,14 +57,14 @@
                     <tr><td colspan="5" class="text-center text-gray-500">Sin datos</td></tr>
                 </tbody>
             </table>
-            <x-input-group
-                name="reason"
-                label="Razón"
-            />
-            <div class="mt-4 flex justify-end">
-                <button type="submit" id="finalize-return" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                    Finalizar devolución
-                </button>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <x-input-group
+                    name="reason"
+                    label="Razón"
+                />
+            </div>
+            <div class="flex justify-center pt-4">
+                <x-primary-button type="submit">Guardar Devolución</x-primary-button>
             </div>
     </div>
 </x-app-layout>

@@ -13,7 +13,7 @@
         name="{{ $name }}" 
         id="{{ $name }}" 
         {{ $required ? 'required' : '' }}
-        class="border rounded-lg p-2"
+        class="w-full border border-gray-900 rounded-lg p-2"
     >
         @foreach($options as $value => $text)
             <option value="{{ $value }}" 

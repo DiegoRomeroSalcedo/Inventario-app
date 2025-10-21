@@ -4,6 +4,11 @@
             {{ __('Marcas')}}
         </h1>
     </x-slot>
+    <div class="mb-6">
+        <x-primary-button>
+            <a href="{{ route('brands.create') }}">Crear Marca</a>
+        </x-primary-button>
+    </div>
     <div>
         <div>
             <table id="brands-table" class="display">
@@ -22,9 +27,6 @@
             </table>
         </div>
     </div>
-    <x-primary-button>
-        <a href="{{ route('brands.create') }}">Crear Marca</a>
-    </x-primary-button>
 
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

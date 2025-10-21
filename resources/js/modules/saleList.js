@@ -47,15 +47,15 @@ export function renderList() {
     const tbody = document.querySelector("#list tbody");
     tbody.innerHTML = saleList.map(item => `
         <tr>
-            <td>${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.brand}</td>
-            <td>${item.quantity}</td>
-            <td>${item.IVA}%</td>
-            <td>$${item.price}</td>
-            <td>${item.discount}%</td>
-            <td>$${item.subtotal.toFixed(2)}</td>
-            <td><button class="remove-item" data-id="${item.id}">X</button></td>
+            <td class="text-center">${item.id}</td>
+            <td class="text-center">${item.name}</td>
+            <td class="text-center">${item.brand}</td>
+            <td class="text-center">${item.quantity}</td>
+            <td class="text-center">${item.IVA}%</td>
+            <td class="text-center">$${item.price}</td>
+            <td class="text-center">${item.discount}%</td>
+            <td class="text-center">$${item.subtotal.toFixed(2)}</td>
+            <td class="text-center"><button class="remove-item bg-white border border-gray-800 px-3 py-1 rounded-md hover:bg-gray-200 transition" data-id="${item.id}">Remover Item</button></td>
         </tr>
     `).join("");
 

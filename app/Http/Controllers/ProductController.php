@@ -66,7 +66,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {  
         // Limpieza de formato: 12.450,00 → 12450.00
         $fieldsToClean = [
             'cost',
@@ -103,8 +103,6 @@ class ProductController extends Controller
             'price_with_discount' => 'nullable|numeric',
             'rentability'       => 'nullable|numeric',
             'details'           => 'nullable|string',
-            'unity_type'         => 'required|string',
-            'unit_of_measure'   => 'nullable|string',
             'brand_id'          => 'nullable|exists:brands,id',
             'quantity'          => 'required|integer|min:0',
         ]);

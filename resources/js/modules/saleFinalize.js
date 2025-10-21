@@ -73,12 +73,9 @@ export function initFinalizeSale() {
                 },
             });
 
-            if (response?.status === 201 || response?.status === 200) {
-                alert("Venta registrada correctamente ✅");
-                window.location.href = `/invoices/${response.data.sale_id}`;
-            } else {
-                alert("Error al registrar la venta. Verifique los datos.");
-            }
+            console.log(response);
+            alert("Venta registrada correctamente ✅");
+            window.location.href = `/invoices/${response.sale_id}`;
         } catch (error) {
             console.error("Error al registrar la venta:", error);
             alert("Ocurrió un error al registrar la venta ❌");

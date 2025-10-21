@@ -13,6 +13,11 @@ export async function getData(url) {
 export async function postData(url = '', data = {}, options = {}) {
     const response = await fetch(url, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            ...options.headers, // permite personalizar si se pasa algo adicional
+        },
         body: JSON.stringify(data),
         ...options
     });
@@ -22,7 +27,6 @@ export async function postData(url = '', data = {}, options = {}) {
         ? await response.json()
         : await response.text();
 
-    // ⚠️ Lanzar error si la respuesta no es exitosa
     if (!response.ok) {
         const error = new Error('Error en la solicitud');
         error.response = {
@@ -34,4 +38,5 @@ export async function postData(url = '', data = {}, options = {}) {
 
     return responseData;
 }
+
 
