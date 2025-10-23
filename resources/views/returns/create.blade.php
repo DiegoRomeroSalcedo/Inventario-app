@@ -64,7 +64,7 @@
                 />
             </div>
             <div class="flex justify-center pt-4">
-                <x-primary-button type="submit">Guardar Devolución</x-primary-button>
+                <x-primary-button id="finalize-return" type="submit">Guardar Devolución</x-primary-button>
             </div>
     </div>
 </x-app-layout>
