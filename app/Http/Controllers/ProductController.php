@@ -206,8 +206,8 @@ class ProductController extends Controller
             'price_with_discount' => 'nullable|numeric',
             'rentability'       => 'nullable|numeric',
             'details'           => 'nullable|string',
-            'unity_type'        => 'required|string',
-            'unit_of_measure'   => 'nullable|string',
+            // 'unity_type'        => 'required|string',
+            // 'unit_of_measure'   => 'nullable|string',
             'brand_id'          => 'nullable|exists:brands,id',
             'quantity'          => 'required|integer|min:0',
         ]);
