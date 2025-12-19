@@ -71,19 +71,6 @@
                     value="{{ old('price', $data->price)}}"
                 />
                 <x-input-group
-                    name="discount"
-                    label="Descuento"
-                    required="false"
-                    value="{{ old('discount', $data->discount)}}"
-                />
-                <x-input-group
-                    name="expiration_date"
-                    type="date"
-                    label="Fecha de Expiración"
-                    :required="false"
-                    value="{{ old('expiration_date', $data->expiration_date)}}"
-                />
-                <x-input-group
                     name="price_with_discount"
                     label="Precio Final"
                     required="false"
