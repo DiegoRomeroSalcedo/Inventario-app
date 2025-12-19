@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Sale;
+use App\Models\Product;
+use App\Models\Stock;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -123,6 +125,30 @@ class InvoiceController extends Controller
                     'discount'           => $item['discount'] ?? 0,
                     'created_by'         => Auth::id(),
                 ]);
+
+                // Actualizamos el stock del producto
+                $product = Product::with('stock')->find($item['id']);
+
+                if (!$product) {
+                    throw new \Exception("Producto ID {$item['id']} no encontrado");
+                }
+
+                // Obtenemos la relacion del stock
+                $stock = $product->stock;
+
+                if (!$stock) {
+                    throw new \Exception("El producto {$prodct->name} no tiene registro de stock");
+                }
+
+                // Validamos si la cantidad vendida es suficiente en el stock
+                if ($stock->quantity < $item['quantity']) {
+                    throw new \Exception("Cantidad insuficiente en el inventario para {$product->name}, validar la información.");
+                }
+
+                // Restamos la cantidad vendida del inventario
+                $stock->quantity -= $item['quantity'];
+                $stock->updated_by = Auth::id();
+                $stock->save();
             }
 
             DB::commit(); // 💾 Confirmamos todo

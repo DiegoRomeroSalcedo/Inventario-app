@@ -12,7 +12,7 @@
         </h2>
     </x-slot>
 
-        <form action="{{ route('sales.store')}}" method="POST">
+        <form class="dark:text-white" action="{{ route('sales.store')}}" method="POST">
             @csrf
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-4">
                 <x-input-group
@@ -22,9 +22,9 @@
             />
             </div>
         </form>
-        <table id="data-product" class="table-auto w-full border mt-4">
+        <table id="data-product" class="table-auto w-full border mt-4 dark:text-white">
     <thead>
-        <tr class="bg-gray-100">
+        <tr class="bg-gray-100 dark:bg-gray-700">
             <th>Código</th>
             <th>Nombre</th>
             <th>Marca</th>
@@ -42,9 +42,9 @@
     </tbody>
 </table>
 
-        <table id="list" class="table-auto w-full border mt-4 mb-8">
+        <table id="list" class="table-auto w-full border mt-4 mb-8 dark:text-white">
             <thead>
-                <tr class="bg-gray-100">
+                <tr class="dark:bg-gray-700">
                     <th>Código</th>
                     <th>Nombre</th>
                     <th>Marca</th>

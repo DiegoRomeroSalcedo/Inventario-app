@@ -3,7 +3,7 @@
         {{ __('Listado de Facturas')}}
     </x-slot>
     <div>
-        <div>
+        <div class="dark:text-white">
             <table id="invoices-table" class="display">
                 <thead>
                     <tr>

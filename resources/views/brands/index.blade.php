@@ -10,8 +10,8 @@
         </x-primary-button>
     </div>
     <div>
-        <div>
-            <table id="brands-table" class="display">
+        <div class="dark:text-white">
+            <table id="brands-table" class="display text-white">
                 <thead>
                     <tr>
                         <th>Id</th>

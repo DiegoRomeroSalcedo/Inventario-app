@@ -38,13 +38,16 @@ export function initFinalizeSale() {
             return alert("El monto recibido es insuficiente.");
         }
 
+        // console.log(saleList);
+        // throw new error('Para aqui');
+
         // Construimos el objeto base de la factura
         const salesData = {
             // subtotal,
             total_sale: total,
             // total_base: subtotal,
             // total_iva: total - subtotal,
-            total_discount: saleList.reduce((sum, item) => sum + ((item.discount / 100) * (item.price * item.quantity)), 0),
+            total_discount: saleList.reduce((sum, item) => sum + Number(item.total_discount || 0), 0),
             received_amount: received,
             change_amount: change,
             payment_method: paymentMethod,

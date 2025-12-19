@@ -4,9 +4,9 @@
             {{ __('Crear Marca') }}
         </h2>
     </x-slot>
-    <form action="{{ route('brands.store') }}" method="POST">
+    <form class="dark:text-white" action="{{ route('brands.store') }}" method="POST">
         @csrf
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="dark:text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <x-input-group
                 name="name"
                 label="Nombre"

@@ -8,7 +8,7 @@
         </x-primary-button>
     </div>
     <div>
-        <div>
+        <div class="dark:text-white">
             <table id="returns-table" class="display">
                 <thead>
                     <tr>

@@ -9,14 +9,23 @@ export function initSaleList() {
 }
 
 export function addItem(product, quantity) {
-    const subtotal = product.price_with_discount * quantity;
+    const unitPrice = product.finalPrice;
+    const subtotal = unitPrice * quantity;
     const exists = saleList.some(item => item.id === product.id);
-    const discountValue = (product.price - product.price_with_discount) * quantity;
 
+    const DISCOUNT_AMOUNT = 5000;
+
+    console.log(saleList);
+    
+    console.log(product.discount_applied);
+    const discountValue = product.discount_applied
+        ? DISCOUNT_AMOUNT * quantity
+        : 0;
+    
     if (exists) {
         saleList = saleList.map(item => 
             item.id === product.id
-                ? { ...item, quantity: item.quantity + quantity, subtotal: item.subtotal + subtotal }
+                ? { ...item, quantity: item.quantity + quantity, discount: item.discount + discountValue, subtotal: item.subtotal + subtotal }
                 : item
         );
     } else {
@@ -27,7 +36,7 @@ export function addItem(product, quantity) {
             IVA: product.IVA ?? 'N/A',
             price: product.price,
             priceWithDiscount: product.price_with_discount,
-            discount: product.discount,
+            discount: discountValue,
             total_discount: discountValue,
             quantity,
             subtotal,
@@ -53,7 +62,7 @@ export function renderList() {
             <td class="text-center">${item.quantity}</td>
             <td class="text-center">${item.IVA}%</td>
             <td class="text-center">$${item.price}</td>
-            <td class="text-center">${item.discount}%</td>
+            <td class="text-center">${item.discount}</td>
             <td class="text-center">$${item.subtotal.toFixed(2)}</td>
             <td class="text-center"><button class="remove-item bg-white border border-gray-800 px-3 py-1 rounded-md hover:bg-gray-200 transition" data-id="${item.id}">Remover Item</button></td>
         </tr>

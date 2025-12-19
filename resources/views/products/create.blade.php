@@ -33,13 +33,12 @@
                 <x-input-group name="cost_with_taxes" label="Costo con Impuestos" />
                 <x-input-group name="utility" label="Utilidad" required="true" />
                 <x-input-group name="price" label="Precio" required="true" />
-                <x-input-group name="discount" label="Descuento" />
-                <x-input-group name="expiration_date" type="date" label="Fecha de Expiración" />
+                <!-- <x-input-group name="expiration_date" type="date" label="Fecha de Expiración" /> -->
                 <x-input-group name="price_with_discount" label="Precio Final" />
                 <x-input-group name="rentability" label="Rentabilidad" required="true" />
                 <x-input-group name="details" label="Detalles" />
                 
-                {{-- <x-select-field 
+                <!-- {{-- <x-select-field 
                     name="unity_type"
                     label="Tipo de Unidad"
                     :options="[
@@ -61,7 +60,7 @@
                         'G'  => 'G',
                         'UNIDAD' => 'UNIDAD',
                     ]"
-                /> --}}
+                /> --}} -->
 
                 <x-input-group name="quantity" label="Cantidad" required="true" />
             </div>

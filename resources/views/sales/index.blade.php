@@ -10,7 +10,7 @@
             </x-primary-button>
         </div>
         <div>
-        <div>
+        <div class="dark:text-white">
             <table id="sales-table" class="display">
                 <thead>
                     <tr>

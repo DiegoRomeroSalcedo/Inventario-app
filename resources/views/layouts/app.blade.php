@@ -18,12 +18,12 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
-        <div class="min-h-screen">
+        <div class="min-h-screen dark:bg-[#0a0a0a]">
             @include('layouts.navigation')
 
             {{-- <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
+                <header class="bg-white dark:bg-gray-400 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -32,7 +32,7 @@
 
             <!-- Page Content -->
             <main>
-                <div class="max-w-auto mx-auto p-6 bg-white dark:bg-[#0a0a0a]">
+                <div class="max-w-auto mx-auto p-6 bg-white dark:bg-[#1D1D22]">
                     {{ $slot }}
                 </div>
             </main>

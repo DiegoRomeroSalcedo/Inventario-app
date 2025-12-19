@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const costWithTaxesInput = document.getElementById('cost_with_taxes');
     const utilityInput = document.getElementById('utility');
     const priceInput = document.getElementById('price');
-    const discountInput = document.getElementById('discount');
-    const expirationInput = document.getElementById('expiration_date');
+    // const discountInput = document.getElementById('discount');
+    // const expirationInput = document.getElementById('expiration_date');
     const finalPriceInput = document.getElementById('price_with_discount');
     const rentabilityInput = document.getElementById('rentability');
+
+    const discount = 5000;
 
 
     initPriceFormatting([
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateFinalPrice() {
-        const finalPrice = calculateFinalPrice(priceInput.value, discount.value);
+        const finalPrice = calculateFinalPrice(priceInput.value, discount);
         finalPriceInput.value = formattedPrice(finalPrice);
     }
 
@@ -56,9 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
     utilityInput.addEventListener('input', () => {
         updatePrice();
         updateFinalPrice();
-    });
-    discountInput.addEventListener('input', () => {
-        updateFinalPrice();
         updateRentability();
     });
+    // discountInput.addEventListener('input', () => {
+    //     updateFinalPrice();
+    //     updateRentability();
+    // });
 })

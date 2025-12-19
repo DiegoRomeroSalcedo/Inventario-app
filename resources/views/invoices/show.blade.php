@@ -3,17 +3,17 @@
         {{ __('Factura de Venta') }}
     </x-slot>
 
+    {{-- @dd($data->toArray()); --}}
+
     <div class="flex justify-center print:m-0 print:p-0">
         <div class="w-[80mm] bg-white text-[11px] leading-tight p-2 font-mono">
             <!-- Encabezado -->
             <div class="text-center border-b border-dashed pb-2 mb-2">
                 <img src="{{ asset('images/logo_empresa.png') }}" alt="Logo Empresa" class="mx-auto w-12 mb-1">
-                <h1 class="text-sm font-bold uppercase">La Guaca</h1>
-                <p class="text-xs">COMERCIALIZADORA DE LA ESPRIELLA SAS</p>
-                <p>NIT: 901656873-7</p>
-                <p>Dirección: BRR COROCITO CL 17 B CR</p>
-                <p>Ciudad: SAHAGÚN - CÓRDOBA</p>
-                <p>Tel: 3003087223</p>
+                <h1 class="text-sm font-bold uppercase">OSBE</h1>
+                <p>Dirección: BRR SAN ISIDRO CLL 14 CR 8 78</p>
+                <p>Ciudad: SANTA ROSA - BOLÍVAR</p>
+                <p>Tel: 3162267605</p>
                 {{-- <p>Condición IVA: IVA</p> --}}
             </div>
 
@@ -33,7 +33,7 @@
                             <th class="w-8">Cant</th>
                             <th>Descripción</th>
                             <th class="text-right">V. Unit</th>
-                            <th class="text-right">%Dto</th>
+                            <th class="text-right">Dto</th>
                             <th class="text-right">Total</th>
                         </tr>
                     </thead>
@@ -43,7 +43,7 @@
                                 <td>{{ (int) $item->quantity }}</td>
                                 <td class="pr-1">{{ $item->product->name }}</td>
                                 <td class="text-right">{{ number_format($item->product->price, 0) }}</td>
-                                <td class="text-right">{{ (int) $item->product->discount }}</td>
+                                <td class="text-right">{{ number_format($item->discount, 0) }}</td>
                                 <td class="text-right">{{ number_format($item->sale_amount, 0) }}</td>
                             </tr>
                         @endforeach

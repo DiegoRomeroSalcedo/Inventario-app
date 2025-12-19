@@ -10,28 +10,27 @@
         </x-primary-button>
     </div>
     <div>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto dark:text-white">
             <table id="products-table" class="display">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Marca</th>
-                        <th>Inventario</th>
-                        <th>Costo</th>
-                        <th>Flete</th>
-                        <th>Retención</th>
+                        <th>CÓDIGO</th>
+                        <th>NOMBRE</th>
+                        <th>MARCA</th>
+                        <th>INVENTARIO</th>
+                        <th>COSTO</th>
+                        <th>FLETE</th>
+                        <th>RETENCION</th>
                         <th>IVA</th>
-                        <th>Costo Final</th>
-                        <th>Utilidad</th>
-                        <th>Precio</th>
-                        <th>Descuento</th>
-                        <th>Precio Final</th>
-                        <th>Rentabilidad</th>
-                        <th>Detalle</th>
-                        <th>Usuario Actualización</th>
-                        <th>Fecha de Creación</th>
-                        <th>Fecha de Actualización</th>
+                        <th>COSTO FINAL</th>
+                        <th>UTILIDAD</th>
+                        <th>PRECIO VENTA</th>
+                        <th>PRECIO VENTA FINAL</th>
+                        <th>RENTABILIDAD</th>
+                        <th>DETALLE</th>
+                        <th>USUARIO ACTUALIZACIÓN</th>
+                        <th>FECHA CREACIÓN</th>
+                        <th>FECHA ACTUALIZACIÓN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,7 +70,6 @@
                     { data: 'cost_with_taxes' },
                     { data: 'utility' },
                     { data: 'price' },
-                    { data: 'discount' },
                     { data: 'price_with_discount' },
                     { data: 'rentability' },
                     { data: 'details' },
