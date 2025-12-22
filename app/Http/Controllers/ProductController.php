@@ -24,10 +24,17 @@ class ProductController extends Controller
         $search = $request->input('search.value');
         $data = Product::with(['brand', 'stock', 'updatedBy'])
             ->when($search, function($query, $search) {
-                $query->where('name', 'like', "%{$search}%")
-                    ->orWhereHas('brand', function($q) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+
+                    if (is_numeric($search)) {
+                        $q->orWhere('id', (int) $search);
+                    }
+
+                    $q->orWhereHas('brand', function($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%");
                     });
+                });
             })
             ->orderBy('id', 'desc');
 

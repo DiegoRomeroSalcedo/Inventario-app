@@ -23,13 +23,15 @@ class SaleReturnController extends Controller
     public function getJsonToSalesReturn(Request $request)
     {
         $search = $request->input('search.value');
-        dd($search);
+        // dd($search);
         $data = DetailReturn::with(['saleReturn', 'sale', 'product'])
             ->when($search, function($query,$search) {
-                $query->where('id', 'like', "%{$search}%")
-                    ->orWhereHas('saleReturn', function($q) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('id', $search)
+                        ->orWhereHas('saleReturn', function($q) use ($search) {
                         $q->where('invoice_id', 'like', "%{$search}%");
                     });
+                });
             })
             ->orderBy('id', 'desc');
 

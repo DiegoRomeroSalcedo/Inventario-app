@@ -25,7 +25,7 @@ class SalesController extends Controller
             ->when($search, function($query, $search) {
                 $query->where('invoice_id', 'like', "%{$search}%")
                     ->orWhereHas('product', function($q) use ($search) {
-                        $q->where('product_id', 'like', "%{$search}%");
+                        $q->where('name', 'like', "%{$search}%");
                     })
                     ->orWhereHas('createdBy', function($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%"); // usuario que creó
