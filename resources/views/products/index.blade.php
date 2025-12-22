@@ -19,8 +19,8 @@
                         <th>MARCA</th>
                         <th>INVENTARIO</th>
                         <th>COSTO</th>
-                        <th>FLETE</th>
                         <th>RETENCION</th>
+                        <th>FLETE</th>
                         <th>IVA</th>
                         <th>COSTO FINAL</th>
                         <th>UTILIDAD</th>

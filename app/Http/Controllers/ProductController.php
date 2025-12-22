@@ -173,6 +173,7 @@ class ProductController extends Controller
             'cost_with_taxes',
             'utility',
             'price',
+            'discount',
             'price_with_discount',
             'rentability',
         ];
@@ -200,6 +201,8 @@ class ProductController extends Controller
             'cost_with_taxes'   => 'nullable|numeric',
             'utility'           => 'nullable|numeric',
             'expiration_date'   => 'nullable|date',
+            'price'             => 'nullable|numeric',
+            'discount'          => 'nullable|numeric',
             'price_with_discount' => 'nullable|numeric',
             'rentability'       => 'nullable|numeric',
             'details'           => 'nullable|string',

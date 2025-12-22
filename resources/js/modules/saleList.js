@@ -13,13 +13,11 @@ export function addItem(product, quantity) {
     const subtotal = unitPrice * quantity;
     const exists = saleList.some(item => item.id === product.id);
 
-    const DISCOUNT_AMOUNT = 5000;
-
-    console.log(saleList);
+    const discountAmount = product.discount;
     
     console.log(product.discount_applied);
     const discountValue = product.discount_applied
-        ? DISCOUNT_AMOUNT * quantity
+        ? discountAmount * quantity
         : 0;
     
     if (exists) {

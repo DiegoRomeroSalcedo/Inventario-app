@@ -15,7 +15,7 @@
         <form action="{{ route('products.store') }}" method="POST" class="space-y-6">
             @csrf
 
-            <!-- 🧩 Sección principal del formulario en grilla -->
+            <!-- Sección principal del formulario en grilla -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <x-input-group name="name" label="Nombre" required="true" />
 
@@ -33,6 +33,7 @@
                 <x-input-group name="cost_with_taxes" label="Costo con Impuestos" />
                 <x-input-group name="utility" label="Utilidad" required="true" />
                 <x-input-group name="price" label="Precio" required="true" />
+                <x-input-group name="discount" label="Descuento" required="false"/>
                 <!-- <x-input-group name="expiration_date" type="date" label="Fecha de Expiración" /> -->
                 <x-input-group name="price_with_discount" label="Precio Final" />
                 <x-input-group name="rentability" label="Rentabilidad" required="true" />
@@ -65,7 +66,7 @@
                 <x-input-group name="quantity" label="Cantidad" required="true" />
             </div>
 
-            <!-- 🧭 Botón centrado -->
+            <!-- Botón centrado -->
             <div class="flex justify-center pt-4">
                 <x-primary-button type="submit">
                     💾 Guardar Producto

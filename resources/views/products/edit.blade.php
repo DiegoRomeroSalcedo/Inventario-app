@@ -70,6 +70,14 @@
                     required="true"
                     value="{{ old('price', $data->price)}}"
                 />
+
+                <x-input-group 
+                    name="discount" 
+                    label="Descuento"  
+                    required="false"
+                    value="{{ old('discount', $data->discount)}}"
+                />
+
                 <x-input-group
                     name="price_with_discount"
                     label="Precio Final"

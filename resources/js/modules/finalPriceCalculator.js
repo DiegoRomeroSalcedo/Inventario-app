@@ -3,7 +3,8 @@ import { roundToDecimals } from "../utils/roundTwoDecimals";
 
 export function calculateFinalPrice(price, discount) {
     const parsePrice = parseNumber(price);
-    const finalPrice = roundToDecimals(parsePrice + discount);
+    const parseDiscount = parseNumber(discount);
+    const finalPrice = roundToDecimals(parsePrice + parseDiscount);
     
     return roundToDecimals(finalPrice);
 }
