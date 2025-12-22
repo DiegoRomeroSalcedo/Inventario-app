@@ -73,7 +73,7 @@
 
                 <x-input-group 
                     name="discount" 
-                    label="Descuento"  
+                    label="Aumento"  
                     required="false"
                     value="{{ old('discount', $data->discount)}}"
                 />
